@@ -2,7 +2,10 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
 import { ProductProvider } from "@/components/product-provider";
-import { ProductThemeScript } from "@/components/product-theme-script";
+import {
+  ProductThemeScript,
+  ProductThemeStyle,
+} from "@/components/product-theme-script";
 import { ThemeProvider } from "@/components/theme-provider";
 import { config } from "@/config";
 
@@ -39,6 +42,9 @@ export default function RootLayout({
   return (
     <html lang="pt-br" suppressHydrationWarning>
       <head>
+        {/* CSS fallback for no-JS users */}
+        <ProductThemeStyle />
+        {/* JS enhancement for localStorage theme preference */}
         <ProductThemeScript />
       </head>
       <body

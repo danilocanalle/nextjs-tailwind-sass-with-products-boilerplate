@@ -1,8 +1,11 @@
 // =============================================================================
-// PRODUCT THEME SCRIPT (Server-Side)
+// PRODUCT THEME COMPONENTS (Server-Side)
 // =============================================================================
-// This component generates an inline script that sets CSS variables
-// before the page renders, preventing flash of unstyled content (FOUC).
+// These components inject product theme CSS variables server-side:
+// - ProductThemeStyle: Pure CSS fallback (works without JavaScript)
+// - ProductThemeScript: JavaScript-enhanced (handles localStorage theme)
+//
+// Together they ensure the correct theme is always applied, even with JS disabled.
 
 import { config } from "@/config";
 import type { ProductTheme } from "@/config/products/types";
@@ -34,7 +37,55 @@ function generateCSSVariables(theme: ProductTheme): string {
   `.trim();
 }
 
-// Generate the blocking script that runs before paint
+// =============================================================================
+// CSS-ONLY FALLBACK (Works without JavaScript)
+// =============================================================================
+// This generates a <style> tag that sets CSS variables using pure CSS.
+// Works immediately on page load, even with JavaScript disabled.
+
+function generateThemeStyles(): string {
+  const lightVars = generateCSSVariables(config.theme.light);
+  const darkVars = generateCSSVariables(config.theme.dark);
+
+  return `
+    /* Light theme (default) */
+    :root {
+      ${lightVars}
+    }
+
+    /* Dark theme via class (set by next-themes) */
+    .dark {
+      ${darkVars}
+    }
+
+    /* System preference fallback (when no .light or .dark class) */
+    @media (prefers-color-scheme: dark) {
+      :root:not(.light) {
+        ${darkVars}
+      }
+    }
+  `.trim();
+}
+
+/**
+ * ProductThemeStyle - Pure CSS Theme Injection
+ *
+ * Generates a <style> tag with CSS variables for both light and dark themes.
+ * This ensures themes work even with JavaScript disabled, using:
+ * - :root for light theme
+ * - .dark class for dark theme (when JS is enabled)
+ * - @media prefers-color-scheme for system preference fallback
+ */
+export function ProductThemeStyle() {
+  return <style dangerouslySetInnerHTML={{ __html: generateThemeStyles() }} />;
+}
+
+// =============================================================================
+// JAVASCRIPT-ENHANCED THEME (Handles localStorage preference)
+// =============================================================================
+// This script reads the user's saved theme from localStorage and applies it
+// immediately, before the page renders. Required for respecting user preference.
+
 function generateThemeScript(): string {
   const lightVars = generateCSSVariables(config.theme.light);
   const darkVars = generateCSSVariables(config.theme.dark);
@@ -63,6 +114,16 @@ function generateThemeScript(): string {
   `.trim();
 }
 
+/**
+ * ProductThemeScript - JavaScript Theme Enhancement
+ *
+ * Generates a blocking <script> that reads the user's theme preference
+ * from localStorage and applies it immediately. This ensures the correct
+ * theme is shown even before React hydration.
+ *
+ * Note: Requires JavaScript. Use together with ProductThemeStyle for
+ * complete coverage including no-JS users.
+ */
 export function ProductThemeScript() {
   return <script dangerouslySetInnerHTML={{ __html: generateThemeScript() }} />;
 }
