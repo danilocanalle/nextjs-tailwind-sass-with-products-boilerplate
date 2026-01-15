@@ -1,0 +1,56 @@
+// =============================================================================
+// SASS FUNCTIONS
+// =============================================================================
+// Utility functions for calculations and transformations.
+
+@use "sass:math";
+
+// -----------------------------------------------------------------------------
+// Unit Conversions
+// -----------------------------------------------------------------------------
+
+/// Convert pixels to rem
+/// @param {Number} $px - Value in pixels
+/// @param {Number} $base - Base font size (default: 16)
+/// @return {Number} - Value in rem
+@function rem($px, $base: 16) {
+  @return math.div($px, $base) * 1rem;
+}
+
+/// Convert pixels to em
+/// @param {Number} $px - Value in pixels
+/// @param {Number} $base - Base font size (default: 16)
+/// @return {Number} - Value in em
+@function em($px, $base: 16) {
+  @return math.div($px, $base) * 1em;
+}
+
+// -----------------------------------------------------------------------------
+// Color Functions
+// -----------------------------------------------------------------------------
+
+/// Create an HSL color string from CSS custom property
+/// @param {String} $var - CSS variable name (without var() or hsl())
+/// @return {String} - HSL color function
+@function hsl-var($var) {
+  @return hsl(var(--#{$var}));
+}
+
+// -----------------------------------------------------------------------------
+// Math Utilities
+// -----------------------------------------------------------------------------
+
+/// Calculate percentage
+/// @param {Number} $part - The part value
+/// @param {Number} $whole - The whole value
+/// @return {Number} - Percentage value
+@function percentage($part, $whole) {
+  @return math.div($part, $whole) * 100%;
+}
+
+/// Strip unit from a number
+/// @param {Number} $value - Value with unit
+/// @return {Number} - Value without unit
+@function strip-unit($value) {
+  @return math.div($value, $value * 0 + 1);
+}

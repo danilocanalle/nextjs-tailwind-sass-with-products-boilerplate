@@ -1,0 +1,51 @@
+// =============================================================================
+// MAIN SASS ENTRY POINT
+// =============================================================================
+// This file imports all Sass partials and can be used for custom styles
+// that complement Tailwind CSS.
+//
+// ARCHITECTURE:
+// - globals.css: Tailwind CSS configuration and base styles
+// - main.scss: Custom Sass styles (this file)
+//
+// Tailwind CSS v4 uses native CSS features and must remain in a .css file.
+// Use this .scss file for additional custom styles with Sass features.
+
+// Import Sass utilities
+@use "variables" as *;
+@use "functions" as *;
+@use "mixins" as *;
+
+// Import component styles
+@use "components/example";
+
+// =============================================================================
+// CUSTOM GLOBAL STYLES
+// =============================================================================
+// Add your custom Sass styles below. These styles will be loaded after
+// Tailwind CSS, so you can use them to extend or override Tailwind utilities.
+
+// Example: Custom scrollbar styling
+::-webkit-scrollbar {
+  width: rem(8);
+  height: rem(8);
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted));
+  border-radius: rem(4);
+
+  &:hover {
+    background: hsl(var(--muted-foreground));
+  }
+}
+
+// Example: Selection styling
+::selection {
+  background: hsl(var(--primary) / 0.2);
+  color: hsl(var(--foreground));
+}

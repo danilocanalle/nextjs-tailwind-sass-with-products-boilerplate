@@ -1,0 +1,9 @@
+// =============================================================================
+// SASS UTILITIES INDEX
+// =============================================================================
+// Main entry point for importing all Sass utilities.
+// Usage in components: @use '@/styles/utilities' as *;
+
+@forward "variables";
+@forward "functions";
+@forward "mixins";

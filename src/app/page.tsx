@@ -1,5 +1,6 @@
 "use client";
 
+import { FeatureCard, FeatureCardGrid } from "@/components/FeatureCard";
 import { ThemeToggle } from "@/components/theme-toggle";
 
 export default function Home() {
@@ -43,7 +44,34 @@ export default function Home() {
           </div>
         </section>
 
+        <section className="mt-20 max-w-5xl mx-auto">
+          <h2 className="text-2xl font-bold text-center mb-8">
+            Componentes com Sass
+          </h2>
+          <FeatureCardGrid>
+            <FeatureCard
+              icon="⚡"
+              title="Rápido"
+              description="Next.js 16 com App Router e React 19 para performance máxima."
+              badge="Novo"
+            />
+            <FeatureCard
+              icon="🎨"
+              title="Estilizado"
+              description="Tailwind CSS 4 com componentes shadcn/ui prontos para usar."
+            />
+            <FeatureCard
+              icon="🌙"
+              title="Tema"
+              description="Suporte a dark mode com next-themes já configurado."
+            />
+          </FeatureCardGrid>
+        </section>
+
         <section className="mt-20 grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <h2 className="col-span-full text-2xl font-bold text-center mb-4">
+            Componentes com Tailwind
+          </h2>
           <div className="text-center space-y-4 p-6 rounded-lg border bg-card">
             <div className="inline-flex items-center justify-center w-12 h-12 bg-primary/10 rounded-xl">
               <span className="text-2xl">⚡</span>

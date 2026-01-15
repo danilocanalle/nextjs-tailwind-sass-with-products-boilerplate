@@ -1,0 +1,34 @@
+// =============================================================================
+// EXAMPLE COMPONENT STYLES
+// =============================================================================
+// This file demonstrates how to use Sass with Tailwind CSS.
+// You can use @apply for Tailwind utilities and Sass features together.
+
+@use "../variables" as *;
+@use "../mixins" as *;
+@use "../functions" as *;
+
+// Example component using Sass with Tailwind
+.example-card {
+  // Using Sass mixin
+  @include transition(transform, $duration-fast);
+
+  // Responsive styles with Sass mixin
+  @include breakpoint("md") {
+    padding: rem(24);
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+
+  &__title {
+    @include text-truncate;
+    font-size: rem(20);
+  }
+
+  &__description {
+    @include text-clamp(3);
+    color: hsl-var(muted-foreground);
+  }
+}

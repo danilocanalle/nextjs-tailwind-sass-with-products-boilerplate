@@ -1,0 +1,40 @@
+// =============================================================================
+// SASS VARIABLES
+// =============================================================================
+// These variables can be used alongside Tailwind CSS for custom styling needs.
+// For design tokens (colors, spacing, etc.), prefer using Tailwind's theme.
+
+// Breakpoints (matching Tailwind's defaults)
+$breakpoints: (
+  "sm": 640px,
+  "md": 768px,
+  "lg": 1024px,
+  "xl": 1280px,
+  "2xl": 1536px,
+);
+
+// Z-index scale
+$z-index: (
+  "dropdown": 1000,
+  "sticky": 1020,
+  "fixed": 1030,
+  "modal-backdrop": 1040,
+  "modal": 1050,
+  "popover": 1060,
+  "tooltip": 1070,
+  "toast": 1080,
+);
+
+// Animation durations
+$duration-fast: 150ms;
+$duration-normal: 300ms;
+$duration-slow: 500ms;
+
+// Animation easings
+$ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+$ease-out: cubic-bezier(0, 0, 0.2, 1);
+$ease-in: cubic-bezier(0.4, 0, 1, 1);
+
+// Container max-widths
+$container-max-width: 1400px;
+$container-padding: 2rem;
