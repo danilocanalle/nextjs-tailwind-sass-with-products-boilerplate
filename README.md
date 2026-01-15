@@ -140,6 +140,40 @@ Este template suporta múltiplos produtos com temas, cores e configurações ind
 2. **SSR**: As variáveis CSS são injetadas no `<head>` antes do render (sem flash)
 3. **Client**: O `ProductProvider` sincroniza mudanças de tema (light/dark)
 
+### Injeção de Tema Server-Side
+
+O sistema usa dois componentes para garantir que o tema funcione em **todos os cenários**:
+
+| Componente           | Tipo       | Funciona sem JS? | Propósito                                               |
+| -------------------- | ---------- | ---------------- | ------------------------------------------------------- |
+| `ProductThemeStyle`  | `<style>`  | ✅ Sim           | CSS puro com `:root`, `.dark` e `prefers-color-scheme`  |
+| `ProductThemeScript` | `<script>` | ❌ Não           | Lê `localStorage` para respeitar preferência do usuário |
+
+**Por que dois componentes?**
+
+- **`ProductThemeStyle`** (CSS puro): Funciona imediatamente, mesmo com JavaScript desabilitado. Usa `@media (prefers-color-scheme: dark)` para respeitar a preferência do sistema.
+
+- **`ProductThemeScript`** (JavaScript): Necessário para ler a preferência salva em `localStorage` quando o usuário escolheu manualmente um tema diferente da preferência do sistema.
+
+**Exemplo no layout:**
+
+```tsx
+// src/app/layout.tsx
+<html lang="pt-br" suppressHydrationWarning>
+  <head>
+    {/* CSS fallback para usuários sem JS */}
+    <ProductThemeStyle />
+    {/* JS para preferência salva no localStorage */}
+    <ProductThemeScript />
+  </head>
+  <body>
+    <ThemeProvider>
+      <ProductProvider>{children}</ProductProvider>
+    </ThemeProvider>
+  </body>
+</html>
+```
+
 ### Estrutura de Configuração
 
 ```
