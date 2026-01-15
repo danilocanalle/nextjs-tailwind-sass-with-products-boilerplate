@@ -86,6 +86,7 @@ Acesse [http://localhost:3000](http://localhost:3000)
 │   ├── lib/             # Utilitários
 │   └── types/           # Definições TypeScript
 ├── components.json      # Configuração shadcn/ui
+├── postcss.config.mjs   # Configuração PostCSS
 └── tsconfig.json        # Configuração TypeScript
 ```
 
