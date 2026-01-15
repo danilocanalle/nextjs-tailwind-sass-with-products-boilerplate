@@ -1,4 +1,4 @@
-# Next.js + Tailwind CSS Template 🚀
+# Next.js + Tailwind CSS + SASS + Products Template 🚀
 
 ![Next.js](https://img.shields.io/badge/Next.js-16.1-black?style=for-the-badge&logo=next.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript)
@@ -14,6 +14,7 @@ Um template moderno e pronto para produção com as últimas versões de Next.js
 - ⚛️ **React 19**
 - 🎨 **Tailwind CSS 4**
 - 💅 **Sass** - Pré-processador CSS com variáveis, mixins e funções
+- 🏷️ **Multi-Produto** - Suporte a múltiplos produtos com temas dinâmicos
 - 🧩 **shadcn/ui** - Componentes acessíveis e customizáveis
 - 🌙 **Dark Mode** - Suporte a tema claro/escuro com next-themes
 - 📦 **TypeScript** - Tipagem estática
@@ -73,8 +74,16 @@ Acesse [http://localhost:3000](http://localhost:3000)
 │   ├── components/      # Componentes React
 │   │   ├── ui/          # Componentes shadcn/ui
 │   │   ├── FeatureCard/ # Exemplo de componente com Sass
+│   │   ├── product-provider.tsx    # Provider multi-produto
+│   │   ├── product-theme-script.tsx # Injeção SSR de tema
 │   │   ├── theme-provider.tsx
 │   │   └── theme-toggle.tsx
+│   ├── config/          # Configuração de produtos
+│   │   ├── products/    # Definições de produtos
+│   │   │   ├── types.ts     # Tipagem ProductConfig
+│   │   │   ├── product-a.ts # Produto A (azul)
+│   │   │   └── product-b.ts # Produto B (roxo)
+│   │   └── index.ts     # Seletor de produto
 │   ├── styles/          # Arquivos Sass
 │   │   ├── _variables.scss  # Variáveis Sass
 │   │   ├── _mixins.scss     # Mixins reutilizáveis
@@ -92,26 +101,197 @@ Acesse [http://localhost:3000](http://localhost:3000)
 
 ## 📜 Scripts Disponíveis
 
-| Comando               | Descrição                                         |
-| --------------------- | ------------------------------------------------- |
-| `npm run dev`         | Inicia o servidor de desenvolvimento              |
-| `npm run build`       | Cria a build de produção                          |
-| `npm run start`       | Inicia o servidor de produção                     |
-| `npm run lint`        | Executa o ESLint                                  |
-| `npm run lint:fix`    | Corrige problemas do ESLint automaticamente       |
-| `npm run update:deps` | Atualiza todas as dependências para última versão |
+| Comando                   | Descrição                                         |
+| ------------------------- | ------------------------------------------------- |
+| `npm run dev`             | Inicia o servidor de desenvolvimento              |
+| `npm run dev:product-a`   | Inicia com Product A                              |
+| `npm run dev:product-b`   | Inicia com Product B                              |
+| `npm run build`           | Cria a build de produção                          |
+| `npm run build:product-a` | Build para Product A                              |
+| `npm run build:product-b` | Build para Product B                              |
+| `npm run start`           | Inicia o servidor de produção                     |
+| `npm run lint`            | Executa o ESLint                                  |
+| `npm run lint:fix`        | Corrige problemas do ESLint automaticamente       |
+| `npm run update:deps`     | Atualiza todas as dependências para última versão |
 
 ## 🔐 Variáveis de Ambiente
 
 Crie um arquivo `.env.local` na raiz do projeto:
 
 ```bash
+# Product Configuration (product-a ou product-b)
+NEXT_PUBLIC_PRODUCT=product-a
+
+# API Configuration
 NEXT_PUBLIC_API_URL=https://sua-api.com
 ```
 
 > **Nota**: Variáveis que precisam ser acessadas no cliente devem ter o prefixo `NEXT_PUBLIC_`.
 
 As variáveis são tipadas em `src/types/env.d.ts`.
+
+## 🏷️ Sistema Multi-Produto
+
+Este template suporta múltiplos produtos com temas, cores e configurações independentes. Cada produto pode ter sua própria identidade visual sem alterar o código.
+
+### Como funciona
+
+1. **Build-time**: O produto é selecionado via `NEXT_PUBLIC_PRODUCT`
+2. **SSR**: As variáveis CSS são injetadas no `<head>` antes do render (sem flash)
+3. **Client**: O `ProductProvider` sincroniza mudanças de tema (light/dark)
+
+### Estrutura de Configuração
+
+```
+src/config/
+├── products/
+│   ├── types.ts       # Interface ProductConfig
+│   ├── product-a.ts   # Configuração Product A
+│   ├── product-b.ts   # Configuração Product B
+│   └── index.ts       # Exports
+└── index.ts           # Seletor baseado em env
+```
+
+### Configuração de um Produto
+
+```typescript
+// src/config/products/product-a.ts
+export const productA: ProductConfig = {
+  // Identidade
+  id: "product-a",
+  name: "Product A",
+  title: "Product A - Dashboard",
+  description: "Descrição do produto",
+  tagline: "Seu slogan aqui",
+
+  // Assets
+  logo: "/logos/product-a.svg",
+  favicon: "/favicons/product-a.ico",
+  ogImage: "/og/product-a.png",
+
+  // Tema (cores em HSL sem hsl())
+  theme: {
+    light: {
+      primary: "223 73% 47%", // #2152cf
+      primaryForeground: "0 0% 100%",
+      secondary: "198 100% 61%", // #36c2ff
+      // ... outras cores
+      gradientPrimary:
+        "linear-gradient(135deg, hsl(223 73% 47%), hsl(198 100% 61%))",
+    },
+    dark: {
+      primary: "223 73% 57%", // Mais claro para dark mode
+      // ... outras cores
+    },
+  },
+
+  // Feature flags
+  features: {
+    darkMode: true,
+    analytics: true,
+    newsletter: true,
+    socialLogin: false,
+  },
+
+  // URLs
+  urls: {
+    api: "https://api.product-a.com",
+    docs: "https://docs.product-a.com",
+    support: "https://support.product-a.com",
+  },
+
+  // SEO
+  seo: {
+    keywords: ["dashboard", "productivity"],
+    author: "Product A Team",
+  },
+};
+```
+
+### Usando em Componentes
+
+```tsx
+"use client";
+
+import { useProduct } from "@/components/product-provider";
+
+export function MyComponent() {
+  const { product, theme } = useProduct();
+
+  return (
+    <div>
+      <h1>{product.name}</h1>
+      <p>{product.description}</p>
+      <p>{product.tagline}</p>
+
+      {product.features.newsletter && <NewsletterForm />}
+    </div>
+  );
+}
+```
+
+### Adicionando um Novo Produto
+
+1. **Crie o arquivo de configuração:**
+
+```typescript
+// src/config/products/product-c.ts
+import type { ProductConfig } from "./types";
+
+export const productC: ProductConfig = {
+  id: "product-c",
+  name: "Product C",
+  // ... configuração completa
+};
+```
+
+2. **Registre no index:**
+
+```typescript
+// src/config/products/index.ts
+export { productC } from "./product-c";
+```
+
+3. **Adicione ao seletor:**
+
+```typescript
+// src/config/index.ts
+import { productC } from "./products/product-c";
+
+const products: Record<string, ProductConfig> = {
+  "product-a": productA,
+  "product-b": productB,
+  "product-c": productC,
+};
+```
+
+4. **Atualize a tipagem:**
+
+```typescript
+// src/types/env.d.ts
+readonly NEXT_PUBLIC_PRODUCT: "product-a" | "product-b" | "product-c";
+```
+
+5. **Adicione scripts (opcional):**
+
+```json
+// package.json
+"dev:product-c": "NEXT_PUBLIC_PRODUCT=product-c next dev",
+"build:product-c": "NEXT_PUBLIC_PRODUCT=product-c next build"
+```
+
+### Conversão de Cores HEX para HSL
+
+Para converter cores HEX para o formato HSL usado no tema:
+
+| HEX       | HSL            |
+| --------- | -------------- |
+| `#2152cf` | `223 73% 47%`  |
+| `#36c2ff` | `198 100% 61%` |
+| `#22c55e` | `142 76% 46%`  |
+| `#8b5cf6` | `252 87% 66%`  |
+
+> **Dica**: Use ferramentas como [HSL Color Picker](https://hslpicker.com/) para converter cores.
 
 ## 🎨 Adicionando Componentes shadcn/ui
 

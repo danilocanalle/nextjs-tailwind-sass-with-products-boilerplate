@@ -4,7 +4,11 @@
   "author": "Danilo Canalle",
   "scripts": {
     "dev": "next dev",
+    "dev:product-a": "NEXT_PUBLIC_PRODUCT=product-a next dev",
+    "dev:product-b": "NEXT_PUBLIC_PRODUCT=product-b next dev",
     "build": "next build",
+    "build:product-a": "NEXT_PUBLIC_PRODUCT=product-a next build",
+    "build:product-b": "NEXT_PUBLIC_PRODUCT=product-b next build",
     "start": "next start",
     "lint": "eslint",
     "lint:fix": "npx eslint . --fix",
