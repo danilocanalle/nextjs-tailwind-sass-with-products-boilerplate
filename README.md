@@ -174,6 +174,75 @@ O sistema usa dois componentes para garantir que o tema funcione em **todos os c
 </html>
 ```
 
+### Tema Customizado por Usuário
+
+O sistema suporta **temas personalizados por usuário logado**. A API `/api/user` pode retornar um `ProductThemeConfig` customizado que sobrescreve o tema do produto.
+
+**Fluxo:**
+
+1. O `layout.tsx` faz fetch de `/api/user` no servidor
+2. Se o usuário estiver logado e tiver tema customizado, esse tema é usado
+3. Caso contrário, usa o tema padrão do produto
+
+**API Route (`/api/user`):**
+
+```typescript
+// src/app/api/user/route.ts
+const IS_LOGGED_IN = true; // Toggle para simular login
+
+const mockUser = {
+  id: "user-123",
+  name: "John Doe",
+  email: "john@example.com",
+  theme: {
+    light: {
+      primary: "0 84% 50%", // Vermelho customizado
+      // ... outras cores
+    },
+    dark: {
+      primary: "0 84% 60%",
+      // ... outras cores
+    },
+  },
+};
+
+export async function GET() {
+  if (!IS_LOGGED_IN) {
+    return NextResponse.json({ user: null, isLoggedIn: false });
+  }
+  return NextResponse.json({ user: mockUser, isLoggedIn: true });
+}
+```
+
+**Layout com tema do usuário:**
+
+```tsx
+// src/app/layout.tsx
+export default async function RootLayout({ children }) {
+  // Fetch do usuário no servidor
+  const userData = await getUser();
+  const userTheme = userData?.user?.theme ?? null;
+
+  return (
+    <html lang="pt-br" suppressHydrationWarning>
+      <head>
+        {/* Passa o tema do usuário (ou null para usar tema do produto) */}
+        <ProductThemeStyle userTheme={userTheme} />
+        <ProductThemeScript userTheme={userTheme} />
+      </head>
+      <body>...</body>
+    </html>
+  );
+}
+```
+
+**Prioridade de temas:**
+
+| Prioridade | Fonte           | Quando é usado                 |
+| ---------- | --------------- | ------------------------------ |
+| 1ª         | Tema do usuário | Usuário logado com tema custom |
+| 2ª         | Tema do produto | Usuário não logado ou sem tema |
+
 ### Estrutura de Configuração
 
 ```

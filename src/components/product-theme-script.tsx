@@ -6,9 +6,18 @@
 // - ProductThemeScript: JavaScript-enhanced (handles localStorage theme)
 //
 // Together they ensure the correct theme is always applied, even with JS disabled.
+// Both components support optional user theme override for logged-in users.
 
 import { config } from "@/config";
-import type { ProductTheme } from "@/config/products/types";
+import type { ProductTheme, ProductThemeConfig } from "@/config/products/types";
+
+// =============================================================================
+// TYPES
+// =============================================================================
+interface ThemeComponentProps {
+  /** Optional user theme that overrides the product theme */
+  userTheme?: ProductThemeConfig | null;
+}
 
 function generateCSSVariables(theme: ProductTheme): string {
   return `
@@ -43,9 +52,9 @@ function generateCSSVariables(theme: ProductTheme): string {
 // This generates a <style> tag that sets CSS variables using pure CSS.
 // Works immediately on page load, even with JavaScript disabled.
 
-function generateThemeStyles(): string {
-  const lightVars = generateCSSVariables(config.theme.light);
-  const darkVars = generateCSSVariables(config.theme.dark);
+function generateThemeStyles(themeConfig: ProductThemeConfig): string {
+  const lightVars = generateCSSVariables(themeConfig.light);
+  const darkVars = generateCSSVariables(themeConfig.dark);
 
   return `
     /* Light theme (default) */
@@ -75,9 +84,16 @@ function generateThemeStyles(): string {
  * - :root for light theme
  * - .dark class for dark theme (when JS is enabled)
  * - @media prefers-color-scheme for system preference fallback
+ *
+ * @param userTheme - Optional user theme that overrides the product theme
  */
-export function ProductThemeStyle() {
-  return <style dangerouslySetInnerHTML={{ __html: generateThemeStyles() }} />;
+export function ProductThemeStyle({ userTheme }: ThemeComponentProps = {}) {
+  const themeConfig = userTheme ?? config.theme;
+  return (
+    <style
+      dangerouslySetInnerHTML={{ __html: generateThemeStyles(themeConfig) }}
+    />
+  );
 }
 
 // =============================================================================
@@ -86,9 +102,9 @@ export function ProductThemeStyle() {
 // This script reads the user's saved theme from localStorage and applies it
 // immediately, before the page renders. Required for respecting user preference.
 
-function generateThemeScript(): string {
-  const lightVars = generateCSSVariables(config.theme.light);
-  const darkVars = generateCSSVariables(config.theme.dark);
+function generateThemeScript(themeConfig: ProductThemeConfig): string {
+  const lightVars = generateCSSVariables(themeConfig.light);
+  const darkVars = generateCSSVariables(themeConfig.dark);
 
   // This script runs synchronously before the page renders
   return `
@@ -123,7 +139,14 @@ function generateThemeScript(): string {
  *
  * Note: Requires JavaScript. Use together with ProductThemeStyle for
  * complete coverage including no-JS users.
+ *
+ * @param userTheme - Optional user theme that overrides the product theme
  */
-export function ProductThemeScript() {
-  return <script dangerouslySetInnerHTML={{ __html: generateThemeScript() }} />;
+export function ProductThemeScript({ userTheme }: ThemeComponentProps = {}) {
+  const themeConfig = userTheme ?? config.theme;
+  return (
+    <script
+      dangerouslySetInnerHTML={{ __html: generateThemeScript(themeConfig) }}
+    />
+  );
 }
