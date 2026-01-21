@@ -433,13 +433,7 @@ export default function ThemeColorsPage() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Card className="overflow-hidden">
-              <div
-                className="h-32 flex items-center justify-center"
-                style={{
-                  background:
-                    "var(--gradient-primary, linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary)) 100%))",
-                }}
-              >
+              <div className="h-32 flex items-center justify-center bg-gradient-primary">
                 <span className="text-primary-foreground font-bold text-xl">
                   Gradient Primary
                 </span>
@@ -452,13 +446,7 @@ export default function ThemeColorsPage() {
             </Card>
 
             <Card className="overflow-hidden">
-              <div
-                className="h-32 flex items-center justify-center"
-                style={{
-                  background:
-                    "var(--gradient-hero, linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--secondary)) 100%))",
-                }}
-              >
+              <div className="h-32 flex items-center justify-center bg-gradient-hero">
                 <span className="text-primary-foreground font-bold text-xl">
                   Gradient Hero
                 </span>
