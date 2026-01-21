@@ -78,8 +78,14 @@ function _injectCSSVariablesDirect(theme: ProductTheme) {
   root.style.setProperty("--destructive", theme.destructive);
   root.style.setProperty(
     "--destructive-foreground",
-    theme.destructiveForeground
+    theme.destructiveForeground,
   );
+  root.style.setProperty("--warning", theme.warning);
+  root.style.setProperty("--warning-foreground", theme.warningForeground);
+  root.style.setProperty("--info", theme.info);
+  root.style.setProperty("--info-foreground", theme.infoForeground);
+  root.style.setProperty("--success", theme.success);
+  root.style.setProperty("--success-foreground", theme.successForeground);
 
   // Gradients
   root.style.setProperty("--gradient-primary", theme.gradientPrimary);
@@ -117,7 +123,7 @@ export function ProductProvider({ children }: ProductProviderProps) {
       product: config,
       theme: currentTheme,
     }),
-    [currentTheme]
+    [currentTheme],
   );
 
   return (

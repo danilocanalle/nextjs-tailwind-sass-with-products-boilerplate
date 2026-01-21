@@ -28,6 +28,15 @@ export interface ProductTheme {
   destructive: string;
   destructiveForeground: string;
 
+  success: string;
+  successForeground: string;
+
+  warning: string;
+  warningForeground: string;
+
+  info: string;
+  infoForeground: string;
+
   // Gradients
   gradientPrimary: string;
   gradientHero: string;

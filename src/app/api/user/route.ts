@@ -44,6 +44,12 @@ const mockUser = {
       ring: "0 84% 50%",
       destructive: "0 84% 60%",
       destructiveForeground: "0 0% 100%",
+      success: "142 76% 36%",
+      successForeground: "0 0% 100%",
+      warning: "38 92% 50%",
+      warningForeground: "0 0% 100%",
+      info: "199 89% 48%",
+      infoForeground: "0 0% 100%",
       gradientPrimary:
         "linear-gradient(135deg, hsl(0 84% 50%), hsl(15 90% 55%))",
       gradientHero:
@@ -71,6 +77,12 @@ const mockUser = {
       ring: "0 84% 60%",
       destructive: "0 62% 50%",
       destructiveForeground: "0 0% 100%",
+      success: "142 76% 46%",
+      successForeground: "0 0% 100%",
+      warning: "38 92% 60%",
+      warningForeground: "0 0% 100%",
+      info: "199 89% 58%",
+      infoForeground: "0 0% 100%",
       gradientPrimary:
         "linear-gradient(135deg, hsl(0 84% 60%), hsl(15 90% 60%))",
       gradientHero:

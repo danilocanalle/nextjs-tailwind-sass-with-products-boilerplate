@@ -45,6 +45,12 @@ export const productB: ProductConfig = {
       // Semantic
       destructive: "0 84.2% 60.2%",
       destructiveForeground: "0 0% 100%",
+      success: "142 76% 36%",
+      successForeground: "0 0% 100%",
+      warning: "38 92% 50%",
+      warningForeground: "0 0% 100%",
+      info: "199 89% 48%",
+      infoForeground: "0 0% 100%",
 
       // Gradients
       gradientPrimary:
@@ -79,6 +85,12 @@ export const productB: ProductConfig = {
       // Semantic
       destructive: "0 62.8% 50%",
       destructiveForeground: "0 0% 100%",
+      success: "142 76% 46%",
+      successForeground: "0 0% 100%",
+      warning: "38 92% 60%",
+      warningForeground: "0 0% 100%",
+      info: "199 89% 58%",
+      infoForeground: "0 0% 100%",
 
       // Gradients
       gradientPrimary:

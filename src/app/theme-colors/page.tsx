@@ -141,6 +141,72 @@ export default function ThemeColorsPage() {
               </CardContent>
             </Card>
 
+            {/* Warning */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Warning</CardTitle>
+                <CardDescription>Cor de aviso/alerta</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  <div className="h-20 rounded-lg bg-warning flex items-center justify-center">
+                    <span className="text-warning-foreground font-semibold">
+                      Warning
+                    </span>
+                  </div>
+                  <div className="h-12 rounded-lg bg-warning/90 flex items-center justify-center">
+                    <span className="text-warning-foreground text-sm">
+                      Warning 90%
+                    </span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Info */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Info</CardTitle>
+                <CardDescription>Cor informativa</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  <div className="h-20 rounded-lg bg-info flex items-center justify-center">
+                    <span className="text-info-foreground font-semibold">
+                      Info
+                    </span>
+                  </div>
+                  <div className="h-12 rounded-lg bg-info/90 flex items-center justify-center">
+                    <span className="text-info-foreground text-sm">
+                      Info 90%
+                    </span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Success */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Success</CardTitle>
+                <CardDescription>Cor de sucesso</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  <div className="h-20 rounded-lg bg-success flex items-center justify-center">
+                    <span className="text-success-foreground font-semibold">
+                      Success
+                    </span>
+                  </div>
+                  <div className="h-12 rounded-lg bg-success/90 flex items-center justify-center">
+                    <span className="text-success-foreground text-sm">
+                      Success 90%
+                    </span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
             {/* Muted */}
             <Card>
               <CardHeader>
@@ -226,6 +292,17 @@ export default function ThemeColorsPage() {
                 <Badge variant="secondary">Secondary Badge</Badge>
                 <Badge variant="destructive">Destructive Badge</Badge>
                 <Badge variant="outline">Outline Badge</Badge>
+              </div>
+              <div className="flex flex-wrap gap-4 mt-4">
+                <Badge className="bg-warning text-warning-foreground">
+                  Warning Badge
+                </Badge>
+                <Badge className="bg-info text-info-foreground">
+                  Info Badge
+                </Badge>
+                <Badge className="bg-success text-success-foreground">
+                  Success Badge
+                </Badge>
               </div>
             </CardContent>
           </Card>
@@ -469,6 +546,11 @@ export default function ThemeColorsPage() {
               <p className="text-destructive">
                 text-destructive - Texto de erro/perigo
               </p>
+              <p className="text-warning">
+                text-warning - Texto de aviso/alerta
+              </p>
+              <p className="text-info">text-info - Texto informativo</p>
+              <p className="text-success">text-success - Texto de sucesso</p>
             </CardContent>
           </Card>
         </section>

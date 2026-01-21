@@ -40,6 +40,12 @@ function generateCSSVariables(theme: ProductTheme): string {
     --ring: ${theme.ring};
     --destructive: ${theme.destructive};
     --destructive-foreground: ${theme.destructiveForeground};
+    --warning: ${theme.warning};
+    --warning-foreground: ${theme.warningForeground};
+    --info: ${theme.info};
+    --info-foreground: ${theme.infoForeground};
+    --success: ${theme.success};
+    --success-foreground: ${theme.successForeground};
     --gradient-primary: ${theme.gradientPrimary};
     --gradient-hero: ${theme.gradientHero};
     --radius: ${theme.radius};
