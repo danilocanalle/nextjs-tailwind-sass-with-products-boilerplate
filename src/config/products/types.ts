@@ -40,9 +40,6 @@ export interface ProductTheme {
   // Gradients
   gradientPrimary: string;
   gradientHero: string;
-
-  // Radius
-  radius: string;
 }
 
 export interface ProductThemeConfig {

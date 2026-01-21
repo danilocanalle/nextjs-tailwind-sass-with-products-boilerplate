@@ -56,9 +56,6 @@ export const productA: ProductConfig = {
       gradientPrimary:
         "linear-gradient(135deg, hsl(223 73% 47%), hsl(198 100% 61%))",
       gradientHero: "linear-gradient(180deg, hsl(0 0% 100%), hsl(223 73% 96%))",
-
-      // Radius
-      radius: "0.75rem",
     },
     dark: {
       // Brand - Blue (lighter for dark mode)
@@ -97,9 +94,6 @@ export const productA: ProductConfig = {
         "linear-gradient(135deg, hsl(223 73% 47%), hsl(198 100% 61%))",
       gradientHero:
         "linear-gradient(180deg, hsl(222.2 47% 11%), hsl(223 73% 20%))",
-
-      // Radius
-      radius: "0.75rem",
     },
   },
 

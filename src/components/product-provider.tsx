@@ -90,9 +90,6 @@ function _injectCSSVariablesDirect(theme: ProductTheme) {
   // Gradients
   root.style.setProperty("--gradient-primary", theme.gradientPrimary);
   root.style.setProperty("--gradient-hero", theme.gradientHero);
-
-  // Radius
-  root.style.setProperty("--radius", theme.radius);
 }
 
 // =============================================================================

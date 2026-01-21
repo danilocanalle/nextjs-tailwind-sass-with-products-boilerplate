@@ -54,7 +54,6 @@ const mockUser = {
         "linear-gradient(135deg, hsl(0 84% 50%), hsl(15 90% 55%))",
       gradientHero:
         "radial-gradient(ellipse at top, hsl(0 84% 50% / 0.15), transparent 50%)",
-      radius: "0.5rem",
     },
     dark: {
       // Red dark theme
@@ -87,7 +86,6 @@ const mockUser = {
         "linear-gradient(135deg, hsl(0 84% 60%), hsl(15 90% 60%))",
       gradientHero:
         "radial-gradient(ellipse at top, hsl(0 84% 60% / 0.2), transparent 50%)",
-      radius: "0.5rem",
     },
   } satisfies ProductThemeConfig,
 };

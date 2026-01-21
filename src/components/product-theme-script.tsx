@@ -48,7 +48,6 @@ function generateCSSVariables(theme: ProductTheme): string {
     --success-foreground: ${theme.successForeground};
     --gradient-primary: ${theme.gradientPrimary};
     --gradient-hero: ${theme.gradientHero};
-    --radius: ${theme.radius};
   `.trim();
 }
 
