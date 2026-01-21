@@ -70,6 +70,7 @@
   --shadow-lg: var(--shadow-lg);
   --shadow-primary: var(--shadow-primary);
 
+  --radius: 0.75rem;
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
