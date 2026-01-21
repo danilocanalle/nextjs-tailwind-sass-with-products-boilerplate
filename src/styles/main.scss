@@ -24,8 +24,12 @@
 // =============================================================================
 // Add your custom Sass styles below. These styles will be loaded after
 // Tailwind CSS, so you can use them to extend or override Tailwind utilities.
+:root {
+  --margin: #{$margin};
+  --padding: #{$padding};
+}
 
-// Example: Custom scrollbar styling
+// Custom scrollbar styling
 ::-webkit-scrollbar {
   width: rem(8);
   height: rem(8);
