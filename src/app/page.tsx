@@ -42,6 +42,14 @@ export default function Home() {
             >
               shadcn/ui
             </a>
+            <a
+              href="/theme-colors"
+              // target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center rounded-md border border-input bg-background px-6 py-3 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground"
+            >
+              Cores do Tema
+            </a>
           </div>
         </section>
 

@@ -11,7 +11,7 @@ import type { ProductThemeConfig } from "@/config/products/types";
 // =============================================================================
 // CONFIGURATION - Toggle this to simulate login states
 // =============================================================================
-const IS_LOGGED_IN = true;
+const IS_LOGGED_IN = false;
 
 // =============================================================================
 // MOCK USER DATA
